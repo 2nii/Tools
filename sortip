@@ -1,0 +1,22 @@
+#!/bin/sh
+
+param1=$1
+ascii='ASCII text'
+
+if [ $# -ne 1 ]; then
+	echo "\nUsage : sortip myfile --> sort IPs from the file myfile\n" 
+	exit 1
+fi
+
+test -f $param1 
+if [ $? -ne 0 ];then 
+	echo "$0 : file not fount \n"
+	exit 1
+fi
+
+test=`̀file -b $param1`
+if [ $test -ne $ascii ];then 
+	echo "\nNeed an Ascii typed file to sort\n"
+	exit 1
+fi
+sort -t . -k 1,1n -k 2,2n -k 3,3n -k 4,4n $param1 
